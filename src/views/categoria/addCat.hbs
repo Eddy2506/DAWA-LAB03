@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Categoría</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container p-4" style="margin-top:70px ;">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h3 class="text-uppercase">CREAR CATEGORIA</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/addCat" method="post" id="createCatForm">
+                            <div class="input-group mt-2">
+                                <label for="nomcli" class="input-group-text">Nombre</label>
+                                <input class="form-control" type="text" name="nomcli" id="nomcli" placeholder="Nombres"
+                                    autofocus required>
+                            </div>
+                            <div class="input-group mt-2">
+                                <label for="apecli" class="input-group-text">Estado</label>
+                                <input class="form-control" type="text" name="apecli" id="apecli" placeholder="Estado"
+                                    required>
+                            </div>
+
+                            <div class="form-group mt-4 d-grid gap-2">
+                                <button type="submit" class="btn btn-success" id="saveBtn">Guardar</button>
+                                <button type="button" class="btn btn-danger" id="cancelBtn">
+                                    <a class="nav-link link-light" aria-current="page" href="/listCat">Cancelar</a>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Manejador para el botón "Guardar"
+        document.getElementById('saveBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Previene el comportamiento por defecto del botón
+            Swal.fire({
+                title: '¿Está seguro que desea guardar esta categoría?',
+                text: "Asegúrese de que todos los campos estén correctos.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Guardar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Enviar el formulario si el usuario confirma
+                    document.getElementById('createCatForm').submit();
+                }
+            });
+        });
+
+        // Manejador para el botón "Cancelar"
+        document.getElementById('cancelBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Previene el comportamiento por defecto del botón
+            Swal.fire({
+                title: '¿Está seguro que desea cancelar?',
+                text: "Se perderán los cambios no guardados.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Cancelar',
+                cancelButtonText: 'Volver'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir a la página de listado si el usuario confirma
+                    window.location.href = document.querySelector('#cancelBtn a').href;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

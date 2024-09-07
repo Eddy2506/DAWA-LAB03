@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Producto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container p-4" style="margin-top:70px ;">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h3 class="text-uppercase">CREAR PRODUCTO</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/addProd" method="post">
+                            <div class="input-group mt-2">
+                                <label for="nomcli" class="input-group-text">Nombre</label>
+                                <input class="form-control" type="text" name="nomcli" id="nomcli" placeholder="Nombres" autofocus required>
+                            </div>
+                            <div class="input-group mt-2">
+                                <label for="apecli" class="input-group-text">Categoria</label>
+                                <input class="form-control" type="text" name="apecli" id="apecli" placeholder="Categoria" required>
+                            </div>
+                            <div class="input-group mt-2">
+                                <label for="precio" class="input-group-text">Precio</label>
+                                <input class="form-control" type="text" name="precio" id="precio" placeholder="Precio" required>
+                            </div>
+                            <div class="form-group mt-4 d-grid gap-2">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <button type="button" class="btn btn-danger"><a class="nav-link link-light" aria-current="page" href="/listProd">Cancelar</a></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.btn-success').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: '¿Está seguro que desea guardar este producto?',
+                text: "Asegúrese de haber completado todos los campos correctamente.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Guardar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/listProd';
+                }
+            });
+        });
+
+        document.querySelector('.btn-danger a').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: '¿Está seguro que desea cancelar?',
+                text: "Se perderán los datos no guardados.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Cancelar',
+                cancelButtonText: 'Volver'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = this.href;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

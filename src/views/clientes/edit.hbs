@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Cliente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container p-4" style="margin-top:70px ;">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h3 class="text-uppercase">ACTUALIZAR CLIENTE</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="updateClientForm" action="/edit/{{cliente.id}}" method="post">
+                            <div class="input-group mt-2">
+                                <label for="name" class="input-group-text">Nombre</label>
+                                <input class="form-control" type="text" name="nomcli" id="nomcli" placeholder="Nombres" value="{{cliente.nomcli}}" autofocus required>
+                            </div>
+                            <div class="input-group mt-2">
+                                <label for="lastname" class="input-group-text">Apellidos</label>
+                                <input class="form-control" type="text" name="apecli" id="apecli" placeholder="Apellidos" value="{{cliente.apecli}}" required>
+                            </div>
+                            <div class="input-group mt-2">
+                                <label for="age" class="input-group-text">Nro. DNI</label>
+                                <input class="form-control" type="text" name="nrodnicli" id="nrodnicli" value="{{cliente.nrodnicli}}" placeholder="Nro. DNI" required>
+                            </div>
+                            <div class="input-group mt-2">
+                                <label for="age" class="input-group-text">Nro. Teléfono</label>
+                                <input class="form-control" type="text" name="telcli" id="telcli" placeholder="Nro. Célular" value="{{cliente.telcli}}" required>
+                            </div>
+                            <div class="form-group mt-4 d-grid gap-2">
+                                <button type="submit" class="btn btn-success"> Actualizar</button>
+                                <a class="btn btn-danger" href="/list"> Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.btn-success').addEventListener('click', function(event) {
+            event.preventDefault(); // Previene el comportamiento por defecto del botón
+
+            Swal.fire({
+                title: '¿Está seguro que desea actualizar este cliente?',
+                text: "Asegúrese de que todos los campos sean correctos antes de guardar.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Actualizar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('updateClientForm').submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
